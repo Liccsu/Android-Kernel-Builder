@@ -1,4 +1,4 @@
-name: "Build Kernels For GTNeo Series UI4.0"
+name: "Build Kernel"
 
 env:
   OUT_DIR: "${{ github.workspace }}/out"
