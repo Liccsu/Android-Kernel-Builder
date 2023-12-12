@@ -39,7 +39,6 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "path": "anykernel",
     "repo": "https://github.com/Liccsu/AnyKernel3",
     "branch": "master"
   }
