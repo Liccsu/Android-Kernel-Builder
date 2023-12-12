@@ -5,7 +5,7 @@
     "repo": "https://github.com/Liccsu/kernel_realme_sm8250",
     "branch": "bigshot-dev",
     "device": "kona",
-    "defconfig": "sm8250_defconfig"
+    "defconfig": "vendor/sm8250_defconfig"
   },
   "withKernelSU": true,
   "toolchains": [
