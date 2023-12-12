@@ -60,6 +60,11 @@ jobs:
           sudo apt-get install -y build-essential bc gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi libssl-dev libfl-dev
           sudo apt-get install -y curl git ftp lftp wget libarchive-tools ccache python2 python2-dev
           sudo apt-get install -y zip unzip tar gzip bzip2 rar unrar
+          sudo apt-get remove make
+          wget https://mirrors.tscak.com/ubuntu/pool/main/m/make-dfsg/make_4.1-9.1ubuntu1_amd64.deb
+          sudo apt-get install -y ./make_4.1-9.1ubuntu1_amd64.deb
+          sudo rm -f ./make_4.1-9.1ubuntu1_amd64.deb
+          make -v
 
       - name: "🚄 Create cache key from `repos`"
         if: ${{ env.ccache == 'true' }}
