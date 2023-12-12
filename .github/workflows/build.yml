@@ -89,16 +89,10 @@ jobs:
         env:
           params: "${{ toJSON(matrix.repos.AnyKernel3) }}"
         run: |
-          ANYKERNEL_PATH=$(echo $params | jq -r ".path")
-          if [ -z "$ANYKERNEL_PATH" ] || [ ! -d "$KERNEL_NAME/$ANYKERNEL_PATH" ]; then
-            ANYKERNEL_REPO=$(echo $params | jq -r ".repo")
-            ANYKERNEL_BRANCH=$(echo $params | jq -r ".branch")
-            git clone --recursive --depth=1 -j $(nproc) --branch $ANYKERNEL_BRANCH $ANYKERNEL_REPO AnyKernel3
-            echo "🤔 Setup Anykernel3 => ($ANYKERNEL_REPO)"
-          else
-            mv "$KERNEL_NAME/$ANYKERNEL_PATH" AnyKernel3
-            echo "🤔 Setup Anykernel3 => ($KERNEL_NAME/$ANYKERNEL_PATH)"
-          fi
+          ANYKERNEL_REPO=$(echo $params | jq -r ".repo")
+          ANYKERNEL_BRANCH=$(echo $params | jq -r ".branch")
+          git clone --recursive --depth=1 -j $(nproc) --branch $ANYKERNEL_BRANCH $ANYKERNEL_REPO AnyKernel3
+          echo "🤔 Setup Anykernel3 => ($ANYKERNEL_REPO)"
 
       - name: "💫 Get toolchains"
         env:

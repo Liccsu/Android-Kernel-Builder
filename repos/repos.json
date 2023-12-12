@@ -3,7 +3,7 @@
   "kernelSource": {
     "name": "UI4.0-KernelSU-RMX3366",
     "repo": "https://github.com/Liccsu/kernel_realme_sm8250",
-    "branch": "bigshot-dev",
+    "branch": "bigshot",
     "device": "kona",
     "defconfig": "vendor/sm8250_defconfig"
   },
