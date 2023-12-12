@@ -225,7 +225,10 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           make ${{ env.args }}
+          cd ${{ env.OUT_DIR }}/..
           tar -czf ${{ env.KERNEL_NAME }}.tgz ./out
+          mv ${{ env.KERNEL_NAME }}.tgz ${{ env.WORKSPACE }}/
+          cd -
 
       - name: "💛 Upload Image"
         uses: actions/upload-artifact@v3
