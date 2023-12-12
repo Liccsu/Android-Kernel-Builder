@@ -299,5 +299,5 @@ jobs:
         if: ${{ env.useAnykernel == 'true' && env.release == 'true' }}
         with:
           tag_name: v${{ env.builddate }}.${{ github.run_number }}
-          files:  ["${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip", "${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz"]
+          files: ["${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip", "${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz"]
           generate_release_notes: true
