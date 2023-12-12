@@ -225,7 +225,7 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           make ${{ env.args }}
-          tar -czf ${{ env.OUT_DIR }}.tgz ${{ env.OUT_DIR }}
+          tar -czf ${{ env.KERNEL_NAME }}.tgz ./out
 
       - name: "💛 Upload Image"
         uses: actions/upload-artifact@v3
@@ -305,6 +305,6 @@ jobs:
         with:
           tag_name: v${{ env.builddate }}.${{ github.run_number }}
           files:  |
-            "${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip"
-            "${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz"
+            ${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip
+            ${{ env.WORKSPACE }}/${{ env.KERNEL_NAME }}.tgz
           generate_release_notes: true
