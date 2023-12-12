@@ -220,6 +220,7 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           make ${{ env.args }}
+          tar -czf ${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz ${{ env.OUT_DIR }}
 
       - name: "💛 Upload Image"
         uses: actions/upload-artifact@v3
@@ -298,5 +299,5 @@ jobs:
         if: ${{ env.useAnykernel == 'true' && env.release == 'true' }}
         with:
           tag_name: v${{ env.builddate }}.${{ github.run_number }}
-          files: "${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip"
+          files: "${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip" "${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz"
           generate_release_notes: true
