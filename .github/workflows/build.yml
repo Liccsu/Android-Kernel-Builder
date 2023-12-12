@@ -220,7 +220,6 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           make ${{ env.args }}
-          tar -czf ${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz ${{ env.OUT_DIR }}
 
       - name: "💛 Upload Image"
         uses: actions/upload-artifact@v3
@@ -294,10 +293,13 @@ jobs:
           path: AnyKernel3/*
 
       - name: 🧧 Create GitHub Release => (${{ env.builddate }})
+        run: tar -czf ${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz ${{ env.OUT_DIR }}
         continue-on-error: true
         uses: softprops/action-gh-release@v1
         if: ${{ env.useAnykernel == 'true' && env.release == 'true' }}
         with:
           tag_name: v${{ env.builddate }}.${{ github.run_number }}
-          files: ["${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip", "${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz"]
+          files:  |
+            "${{ env.WORKSPACE }}/${{ env.KERNEL_DEVICE }}-${{ env.KERNEL_NAME }}_${{ env.builddate }}.zip"
+            "${{ env.WORKSPACE }}/${{ env.OUT_DIR }}.tgz"
           generate_release_notes: true
