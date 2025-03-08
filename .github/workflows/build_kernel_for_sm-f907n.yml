@@ -32,6 +32,7 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         # git clone https://github.com/Blackmanx/kernel_realme_sm8250 -b bigshot android-kernel --depth=1
         wget -O Kernel.tar.gz https://api.hostize.com/files/v_zqrL_Woa/download/file.gz
+        mkdir android-kernel
         tar -xzpf Kernel.tar.gz -C android-kernel
 
     # - name: Setup KernelSU
