@@ -1,7 +1,5 @@
 name: Build Kernel For GTmaster
 on:
-  schedule:
-    - cron:  '0 4 * * *'
   workflow_dispatch:
 
 jobs:
