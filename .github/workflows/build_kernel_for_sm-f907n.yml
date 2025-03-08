@@ -24,7 +24,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         # git clone https://github.com/kdrag0n/proton-clang clang --depth=1
-        git clone https://github.com/mranonymz/android-kernel-tools.git tools --depth=1
+        git clone https://github.com/Liccsu/android-kernel-tools.git tools --depth=1
         
     - name: Download kernel source
       run: |
