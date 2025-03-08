@@ -23,7 +23,8 @@ jobs:
     - name: Download Proton-Clang
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        git clone https://github.com/kdrag0n/proton-clang clang --depth=1
+        # git clone https://github.com/kdrag0n/proton-clang clang --depth=1
+        git clone https://github.com/mranonymz/android-kernel-tools.git tools --depth=1
         
     - name: Download kernel source
       run: |
@@ -53,9 +54,15 @@ jobs:
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang/bin:$PATH KCFLAGS="-Wno-strict-prototypes -Wno-error=strict-prototypes"
-        make -j$(nproc --all) CROSS_COMPILE=aarch64-linux-gnu- CC=clang O=out ARCH=arm64 DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CLANG_TRIPLE=aarch64-linux-gnu- KCFLAGS="-Wno-strict-prototypes -Wno-error=strict-prototypes" winnerx_kor_single_defconfig
-        make -j$(nproc --all) CROSS_COMPILE=aarch64-linux-gnu- CC="ccache clang" O=out ARCH=arm64 DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CLANG_TRIPLE=aarch64-linux-gnu- KCFLAGS="-Wno-strict-prototypes -Wno-error=strict-prototypes"
+        export ARCH=arm64
+        mkdir out
+        # export PATH=$GITHUB_WORKSPACE/kernel_workspace/tools/bin:$PATH
+        BUILD_CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+        KERNEL_LLVM_BIN=$GITHUB_WORKSPACE/kernel_workspace/tools/clang/host/linux-x86/clang-r407598/bin/clang
+        CLANG_TRIPLE=aarch64-linux-gnu-
+        KERNEL_MAKE_ENV="DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y"
+        make -j$(nproc --all) -C $(pwd) O=$(pwd)/out $KERNEL_MAKE_ENV ARCH=arm64 CROSS_COMPILE=$BUILD_CROSS_COMPILE REAL_CC=$KERNEL_LLVM_BIN CLANG_TRIPLE=$CLANG_TRIPLE winnerx_kor_single_defconfig
+        make -j$(nproc --all) -C $(pwd) O=$(pwd)/out $KERNEL_MAKE_ENV ARCH=arm64 CROSS_COMPILE=$BUILD_CROSS_COMPILE REAL_CC=$KERNEL_LLVM_BIN CLANG_TRIPLE=$CLANG_TRIPLE
 
     - name: Make Anykernel3
       run: |
