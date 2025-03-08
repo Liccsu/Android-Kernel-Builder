@@ -56,11 +56,11 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export ARCH=arm64
         mkdir out
-        # export PATH=$GITHUB_WORKSPACE/kernel_workspace/tools/bin:$PATH
-        BUILD_CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
-        KERNEL_LLVM_BIN=$GITHUB_WORKSPACE/kernel_workspace/tools/clang/host/linux-x86/clang-r407598/bin/clang
-        CLANG_TRIPLE=aarch64-linux-gnu-
-        KERNEL_MAKE_ENV="DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y"
+        export PATH=$GITHUB_WORKSPACE/kernel_workspace/tools/clang/host/linux-x86/clang-r407598/bin:$PATH
+        export BUILD_CROSS_COMPILE=$GITHUB_WORKSPACE/kernel_workspace/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+        export KERNEL_LLVM_BIN=$GITHUB_WORKSPACE/kernel_workspace/tools/clang/host/linux-x86/clang-r407598/bin/clang
+        export CLANG_TRIPLE=aarch64-linux-gnu-
+        export KERNEL_MAKE_ENV="DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y"
         make -j$(nproc --all) -C $(pwd) O=$(pwd)/out $KERNEL_MAKE_ENV ARCH=arm64 CROSS_COMPILE=$BUILD_CROSS_COMPILE REAL_CC=$KERNEL_LLVM_BIN CLANG_TRIPLE=$CLANG_TRIPLE winnerx_kor_single_defconfig
         make -j$(nproc --all) -C $(pwd) O=$(pwd)/out $KERNEL_MAKE_ENV ARCH=arm64 CROSS_COMPILE=$BUILD_CROSS_COMPILE REAL_CC=$KERNEL_LLVM_BIN CLANG_TRIPLE=$CLANG_TRIPLE
 
